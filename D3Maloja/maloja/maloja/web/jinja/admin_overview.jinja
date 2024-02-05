@@ -1,0 +1,115 @@
+{% set page ='admin_overview' %}
+{% extends "abstracts/admin.jinja" %}
+{% block title %}Maloja - Admin Panel{% endblock %}
+
+{% block scripts %}
+	<script>
+
+		function versioncompare(a,b) {
+			for (var pos=0;pos<3;pos++) {
+				var v1 = parseInt(a[pos]) || 0;
+				var v2 = parseInt(b[pos]) || 0;
+				if (v1 > v2) { return 1;}
+				if (v1 < v2) { return -1;}
+			}
+
+			return 0;
+		}
+		neo.xhttprequest("https://pypi.org/pypi/malojaserver/json",{},"GET",json=true).then((response)=>{
+			result = JSON.parse(response.responseText);
+			latestvers = result.info.version.split(".");
+
+			neo.xhttprequest("/apis/mlj_1/serverinfo",{},"GET",json=true).then((response)=>{
+
+				result = JSON.parse(response.responseText);
+				thisvers = result.version;
+
+				document.getElementById("latestversion").innerHTML = latestvers.join(".");
+				document.getElementById("currentversion").innerHTML = thisvers.join(".");
+
+				if (versioncompare(latestvers,thisvers) <= 0) {
+					document.getElementById("currentversion").style.color = "green";
+				}
+				else {
+					document.getElementById("currentversion").style.color = "red";
+					document.getElementById("updatestatus").innerHTML = "Consider updating to take advantage of new features";
+				}
+			});
+		});
+
+
+		function activate() {
+			neo.setCookie("adminmode","true");
+			window.location.reload(true);
+		}
+		function deactivate() {
+			neo.setCookie("adminmode","false");
+			window.location.reload(true);
+		}
+
+	</script>
+{% endblock %}
+
+
+	{% block maincontent %}
+
+	<h2>Update</h2>
+
+	Currently installed Maloja version: <span id="currentversion">Loading...</span><br/>
+	Latest recommended Maloja version: <span id="latestversion">Loading...</span><br/>
+	<span id="updatestatus"></span>
+
+
+	<h2>Admin Mode</h2>
+
+	With Admin Mode activated, you can:
+	<ul>
+		<li>manually scrobble from track pages</li>
+		<li>delete scrobbles</li>
+		<li>reparse scrobbles</li>
+		<li>edit tracks, albums and artists</li>
+		<li>merge tracks, albums and artists</li>
+		<li>upload artist, album and track art by dropping a file on the existing image on an artist or track page</li>
+		<li>see more detailed error pages</li>
+	</ul>
+
+	{% if adminmode %}
+	<button type="button" id="adminmodebutton" onclick="deactivate()">Deactivate</button>
+	{% else %}
+	<button type="button" id="adminmodebutton" onclick="activate()">Activate</button>
+	{% endif %}
+
+	<h2>Download Data</h2>
+
+	Backup your data.<br/><br/>
+
+	<a class="hidelink" href="/apis/mlj_1/backup" download="maloja_backup.tar.gz">
+		<button type="button">Backup</button>
+	</a>
+	<a class="hidelink" href="/apis/mlj_1/export" download="maloja_export.json">
+		<button type="button">Export</button>
+	</a>
+
+
+
+	<h2>Links</h2>
+
+	<a class="textlink" target="_blank" rel="noopener noreferrer" href="https://github.com/krateng/maloja/issues/new">Report Issue</a><br/>
+	<a class="textlink" target="_blank" rel="noopener noreferrer" href="https://github.com/krateng/maloja/blob/master/README.md">Readme</a><br/>
+	<a class="textlink" target="_blank" rel="noopener noreferrer" href="https://pypi.org/project/malojaserver/">PyPi</a> |
+	<a class="textlink" target="_blank" rel="noopener noreferrer" href="https://hub.docker.com/r/krateng/maloja">Dockerhub</a> |
+	<a class="textlink" target="_blank" rel="noopener noreferrer" href="https://github.com/krateng/maloja">Github</a><br/>
+
+
+
+
+
+
+	{% if false %}
+	<h2>Change Password</h2>
+
+	<input class="simpleinput" type="password" placeholder="New Password"></input><br/>
+	<input class="simpleinput" type="password" placeholder="Repeat"></input><br/><br/>
+	<button type="button" onclick="changepw()">Change</button>
+	{% endif %}
+	{% endblock %}

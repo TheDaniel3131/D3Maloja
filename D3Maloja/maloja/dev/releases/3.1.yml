@@ -1,0 +1,43 @@
+minor_release_name: "Soyeon"
+3.1.0:
+    commit: "bfa553bed05d7dba33f611a44485d6cf460ba308"
+    notes:
+    - "[Architecture] Cleaned up legacy process control"
+    - "[Architecture] Added proper exception framework to native API"
+    - "[Feature] Implemented track title and artist name editing from web interface"
+    - "[Feature] Implemented track and artist merging from web interface"
+    - "[Feature] Implemented scrobble reparsing from web interface"
+    - "[Performance] Adjusted cache sizes"
+    - "[Logging] Added cache memory use information"
+    - "[Technical] Bumped Python Version and various dependencies"
+3.1.1:
+    commit: "20aae955b2263be07c56bafe4794f622117116ef"
+    notes:
+    - "[Bugfix] Fixed inclusion of custom css files"
+    - "[Bugfix] Fixed list values in configuration"
+3.1.2:
+    commit: "a0739306013cd9661f028fb5b2620cfa2d298aa4"
+    notes:
+    - "[Feature] Added remix artist parsing"
+    - "[Feature] Added API debug mode"
+    - "[Bugfix] Fixed leftover whitespaces when parsing titles"
+    - "[Bugfix] Fixed handling of fallthrough values in config file"
+3.1.3:
+    commit: "f3a04c79b1c37597cdf3cafcd95e3c923cd6a53f"
+    notes:
+    - "[Bugfix] Fixed infinite recursion with capitalized featuring delimiters"
+    - "[Bugfix] Fixed favicon display"
+3.1.4:
+    commit: "ef06f2262205c903e7c3060e2d2d52397f8ffc9d"
+    notes:
+    - "[Feature] Expanded information saved from Listenbrainz API"
+    - "[Feature] Added import for Listenbrainz exports"
+    - "[Bugfix] Sanitized artists and tracks with html-like structure"
+3.1.5:
+    commit: "4330b0294bc0a01cdb841e2e3db370108da901db"
+    notes:
+    - "[Feature] Made image upload part of regular API"
+    - "[Bugfix] Additional entity name sanitization"
+    - "[Bugfix] Fixed image display on Safari"
+    - "[Bugfix] Fixed entity editing on Firefox"
+    - "[Bugfix] Made compatibile with SQLAlchemy 2.0"

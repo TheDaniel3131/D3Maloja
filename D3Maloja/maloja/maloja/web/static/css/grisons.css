@@ -1,0 +1,167 @@
+/**
+	COMMON STYLES FOR MALOJA, ALBULA AND POSSIBLY OTHERS
+**/
+
+@import url("/grisonsfont.css");
+
+:root {
+	--base-color: #232327;
+	--base-color-dark: #090909;
+	--base-color-light: #343437;
+	--base-color-accent: #26262A;
+	--base-color-accent-dark: #1d1d21;
+	--base-color-accent-light: #404044;
+
+	--text-color: beige;
+	--text-color-selected: fadeout(var(--text-color),40%);
+	--text-color-secondary: #bbb;
+	--text-color-tertiary: grey;
+	--text-color-focus: yellow;
+
+	--ctrl-element-color-bg: rgba(0,255,255,0.1);
+	--ctrl-element-color-main: rgba(103,85,0,0.7);
+	--ctrl-element-color-focus: gold;
+
+	--button-color-bg: var(--text-color);
+	--button-color-bg-focus: var(--text-color-focus);
+	--button-color-fg: var(--base-color);
+	--button-color-fg-focus: var(--base-color);
+}
+
+
+
+
+body {
+	--current-bg-color: var(--base-color); /* drag this information through inheritances */
+	background-color: var(--current-bg-color);
+	color: var(--text-color);
+	font-family:"Ubuntu";
+}
+
+/* TOP INFO TABLE */
+
+table.top_info td.image div {
+	margin-right:20px;
+	margin-bottom:20px;
+	background-size:cover;
+	background-position:top center;
+	height:174px;
+	width:174px
+}
+
+table.top_info td.text {
+	vertical-align: top;
+}
+
+table.top_info td.text h1 {
+	display:inline;
+	padding-right:5px;
+}
+
+
+table.top_info td.text table.image_row td {
+	height:50px;
+	width:50px;
+	background-size:cover;
+	background-position:center;
+	background-repeat: no-repeat;
+	opacity:0.5;
+	filter: grayscale(80%);
+}
+table.top_info td.text table.image_row td:hover {
+	opacity:1;
+	filter: grayscale(0%);
+}
+
+
+span.spacer {
+    width: 9px;
+    display: inline-block;
+}
+
+
+
+/** SCROLLBAR **/
+
+::-webkit-scrollbar {
+  width: 8px;
+  cursor: pointer;
+}
+::-webkit-scrollbar-track {
+  background: grey;
+  background-color: var(--ctrl-element-color-bg);
+}
+::-webkit-scrollbar-thumb {
+background-color: var(--ctrl-element-color-main);
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--ctrl-element-color-focus);
+}
+
+
+
+
+[onclick]:hover, a:hover {
+	cursor: pointer;
+}
+
+
+/** HOVERABLE LOAD/PROGRESS BAR **/
+
+
+div.grisons_bar {
+	background-color: var(--ctrl-element-color-bg);
+}
+div.grisons_bar>div {
+	height:100%;
+	background-color: var(--ctrl-element-color-main);
+}
+div.grisons_bar:hover>div {
+	background-color: var(--ctrl-element-color-focus);
+}
+
+
+
+
+
+/** LINKS **/
+
+
+a {
+	color:inherit;
+	text-decoration:none;
+}
+a:hover {
+ text-decoration:underline;
+}
+
+/* for links in running text */
+a.textlink {
+	color: var(--text-color-focus);
+}
+a.hidelink:hover {
+	text-decoration:none;
+}
+
+
+
+/** INPUTS **/
+
+input[type="text"], input[type="number"] {
+    background-color: transparent;
+    border: 0px;
+    border-bottom: 1px solid var(--text-color);
+    color: white;
+}
+
+input:focus {
+	outline: 0;
+	background-color: var(--base-color-accent-light);
+}
+
+
+
+
+.hide {
+	display:none !important;
+}

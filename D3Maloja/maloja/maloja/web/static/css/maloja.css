@@ -1,0 +1,1181 @@
+@import url("/grisons.css");
+
+:root {
+    --color-certified-diamond: 103, 161, 253;
+    --color-certified-platinum: 229, 228, 226;
+    --color-certified-gold: 255, 215, 0;
+
+    --color-rank-gold: var(--color-certified-gold);
+    --color-rank-silver: 192, 192, 192;
+    --color-rank-bronze: 205, 127, 50;
+}
+
+body {
+	padding:15px;
+	padding-bottom:60px;
+	/**
+	padding-top:45px;
+	padding-bottom:25px;
+	**/
+/*
+	font-size:1.65vh;
+*/
+}
+
+
+body.certified {
+    background: radial-gradient(circle at top left, rgba(var(--certification-color),0.5) 0%, var(--current-bg-color) 20%);
+    background-position: 0px 0px;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    height:100%;
+}
+
+/* just make sure that whenever anything is certified, we set this variable.
+ how its used is the job of the specific elements */
+.certified_diamond {
+    --certification-color: var(--color-certified-diamond);
+}
+.certified_platinum{
+    --certification-color: var(--color-certified-platinum);
+}
+.certified_gold {
+    --certification-color: var(--color-certified-gold);
+}
+.certified_None {
+    --certification-color: none;
+    /* overwrite this for non-certified elements on certified pages (albums of artist) */
+}
+
+.certified.smallcerticon svg {
+    fill: rgba(var(--certification-color),1);
+}
+
+
+
+input[type="date"] {
+	background-color:inherit;
+	color:inherit;
+	outline: none;
+	border:0px;
+	font-family: inherit;
+	font-size: inherit;
+
+}
+
+
+
+
+/**
+Header (unused)
+**/
+
+/**
+div.header {
+	position:fixed;
+	height:45px;
+	width:100%;
+	background-color:rgba(255,215,0,1);
+	top:0px;
+	left:0px;
+	padding:10px;
+	opacity:1;
+
+	color:black;
+
+	z-index:5;
+}
+
+div.header h1 {
+	margin:5px;
+}
+**/
+
+
+/**
+ settings icon
+**/
+
+svg {
+	fill: var(--text-color);
+}
+
+div#icon_bar {
+	position:fixed;
+	right:30px;
+	top:30px;
+}
+.iconsubset {
+	display: inline-block;
+	padding-left:20px;
+}
+
+div#icon_bar div.clickable_icon {
+	display: inline-block;
+	height:26px;
+	width:26px;
+}
+div.clickable_icon svg {
+	cursor: pointer;
+}
+div.clickable_icon:hover svg {
+	fill: var(--text-color-focus);
+}
+div.clickable_icon.danger:hover svg {
+	fill: red;
+}
+
+#icon_bar svg {
+	width:24px;
+	height:24px;
+}
+.list svg {
+	height:16px;
+}
+.list div.clickable_icon {
+	display: inline-block;
+}
+
+.list {
+	--color_bg_merge: rgba(0,0,90,0.7);
+	--color_fg_merge: lightblue;
+	--color_bg_associate: rgba(50,20,0,0.7);
+	--color_fg_associate: orange;
+}
+
+.list tr.marked_for_associate {
+	background-color: var(--color_bg_associate);
+	color: var(--color_fg_associate);
+}
+.list tr.marked_for_merge {
+	background-color: var(--color_bg_merge);
+	color: var(--color_fg_merge);;
+}
+
+@keyframes slideBackground {
+  0% {
+    background-position: 100% 0;
+  }
+	50% {
+		background-position: 0 0;
+	}
+  100% {
+    background-position: 100% 0;
+  }
+}
+@keyframes colorChange {
+  0% {
+    color: var(--color_fg_associate);
+  }
+  50% {
+    color: var(--color_fg_merge);
+  }
+  100% {
+    color: var(--color_fg_associate);
+  }
+}
+
+.list tr.marked_for_associate.marked_for_merge {
+	background: linear-gradient(to left, var(--color_bg_associate), var(--color_bg_merge));
+  background-size: 100% 100%;
+  animation: colorChange 4s infinite ease-in-out;
+}
+
+
+/* this is just to 'factor out' that big selector down there.
+we want icons to not be displayed in list rows, but show them with reduced opacity in the top bar */
+.list {
+	--display_inactive_icons: none;
+}
+#icon_bar {
+	--display_inactive_icons: inline-block;
+}
+
+.associateicons.marked_for_associate .associationmarkicon, /* already marked, cant mark again */
+.associateicons:not(.marked_for_associate) .associationunmarkicon, /* not marked, cant unmark */
+.associateicons:not(.somethingmarked_for_associate) .associatecancelicon, /* cant cancel when nothing is marked */
+.mergeicons.marked_for_merge #mergemarkicon, /* already marked, cant mark again */
+.mergeicons:not(.marked_for_merge) #mergeunmarkicon, /* not marked, cant unmark */
+.mergeicons:not(.somethingmarked_for_merge) #mergecancelicon, /* cant cancel when nothing is marked */
+.mergeicons:not(.somethingmarked_for_merge) #mergeicon, /* can't merge when nothing is selected */
+.mergeicons.marked_for_merge #mergeicon, /* cant merge into one of the things we have selected */
+.associateicons:not(.sources_marked_for_associate) #associatealbumicon,
+.associateicons:not(.sources_marked_for_associate) #associateartisticon,
+.associateicons:not(.sources_marked_for_associate) #removealbumicon,
+.associateicons:not(.sources_marked_for_associate) #removeartisticon /* nothing marked yet, can't associate with this */
+ {
+	pointer-events: none;
+	opacity:0.5;
+	display: var(--display_inactive_icons);
+}
+
+/**
+Footer
+**/
+
+div#footer {
+	position:fixed;
+	bottom:0;
+	left:0;
+	right:0;
+	padding-left:20px;
+	padding-right:20px;
+	height:20px;
+
+	background-color: var(--base-color-dark);
+
+	display: flex;
+    align-items: center;
+
+	padding:10px;
+	opacity:1;
+}
+
+#left-side, #right-side {
+  flex: 1;
+}
+
+#left-side {
+  text-align: left;
+  padding-left: 10px;
+}
+
+#right-side {
+  text-align: right;
+  padding-right: 10px;
+}
+
+#notch {
+
+   --notch-size: 70px;
+  background-color: var(--base-color-dark);
+  width: var(--notch-size);
+  height: var(--notch-size);
+  position: relative;
+  margin-top: -5px;
+  z-index: 1;
+
+  border-radius: 50%;
+  transform: translate(0%, -40%);
+}
+
+#notch img {
+  --notch-img-size: 80px;
+  position: absolute;
+  top: calc((var(--notch-size) - var(--notch-img-size)) / 2);
+  left: calc((var(--notch-size) - var(--notch-img-size)) / 2);
+
+  width: var(--notch-img-size);
+  height: auto;
+
+}
+#notch img:hover {
+    /*transform: scale(1.1);*/
+    animation: spin 4s linear infinite;
+}
+
+@keyframes spin {
+    from {
+        transform: rotate(0deg);
+    } to {
+        transform: rotate(360deg);
+    }
+}
+
+
+div#footer input {
+	background-color:inherit;
+	border:0px;
+	border-bottom:1px solid beige;
+	color:beige;
+	font-size:90%;
+	width:70%;
+	padding-left:5px;
+	padding-right:5px;
+	padding-top:2px;
+	padding-bottom:2px;
+	font-family:"Ubuntu";
+}
+
+div#footer input:focus {
+	outline:none;
+	/**background-color:rgba(245,245,220,0.05);**/
+
+}
+
+div.searchresults {
+	position:fixed;
+	bottom:50px;
+	right:20px;
+	width:500px;
+	background-color:rgba(10,10,10,0.99);
+	padding:15px;
+}
+
+div.searchresults>span {
+	font-size:20px;
+	font-weight:bold;
+}
+
+div.searchresults table {
+	width:100%;
+	border-spacing:0px 4px;
+}
+
+div.searchresults tr {
+	background-color:rgba(5,5,5,1);
+	margin-top:5px;
+	margin-bottom:5px;
+	height:50px;
+	cursor:pointer;
+
+}
+div.searchresults tr:hover {
+	background-color:rgba(35,35,35,1);
+}
+
+div.searchresults tr td.image {
+	height:50px;
+	width:50px;
+	background-size:cover;
+	background-position:center;
+}
+
+div.searchresults tr td:nth-child(2) {
+	padding-left:10px;
+}
+
+div.searchresults table.searchresults_extrainfo td span:nth-child(1) {
+	font-size:12px;
+	color:grey;
+
+}
+
+
+/**
+Notifications
+**/
+
+div#notification_area {
+	position: fixed;
+	width:420px;
+	bottom:40px;
+	right:20px;
+}
+div#notification_area div.notification {
+	background-color:black;
+	width:400px;
+	min-height:50px;
+	margin-bottom:7px;
+	padding:9px;
+	opacity:0.5;
+	border-left: 8px solid var(--notification-color);
+	border-radius: 3px;
+}
+div#notification_area div.notification:hover {
+	opacity:0.95;
+}
+
+
+@media (max-width: 1000px) {
+
+	div#footer #left-side {
+		display:none;
+	}
+	div#footer #right-side {
+		text-align:right;
+	}
+
+}
+
+
+
+
+p.desc a {
+	padding-left:20px;
+	background-repeat:no-repeat;
+	background-size:contain;
+	background-position:left;
+	background-image:url("https://www.last.fm/static/images/lastfm_avatar_twitter.66cd2c48ce03.png");
+}
+
+table.top_info + .stat_module_topartists table,
+table.top_info + .stat_module_toptracks table {
+	margin:15px 0;
+}
+
+/*
+**
+**
+** SPECIAL TEXT BITS
+**
+**
+*/
+
+
+.paginate {
+	text-align: center;
+	padding:30px;
+}
+
+
+
+.stats {
+	color: var(--text-color-tertiary);
+}
+.rank {
+	text-align:right;
+	color: var(--text-color-tertiary);
+}
+.extra {
+	color: var(--text-color-tertiary);
+	font-size:80%;
+}
+
+.blocked {
+	opacity:0.2;
+	cursor:not-allowed;
+}
+
+
+input#apikey {
+	font-family:'Ubuntu';
+	outline:none;
+	border: 0px solid;
+	padding:2px;
+}
+
+input.simpleinput {
+	font-family:'Ubuntu';
+	color: var(--text-color);
+	outline:none;
+	border-top: 0px solid;
+	border-left: 0px solid;
+	border-right: 0px solid;
+	padding:2px;
+	background-color:inherit;
+	border-bottom: 1px solid var(--text-color);
+}
+
+
+a {
+	cursor:pointer;
+}
+
+
+
+span.stat_selector_pulse,span.stat_selector_topartists,span.stat_selector_toptracks {
+	cursor:pointer;
+}
+
+
+
+h2.headerwithextra {
+	display:inline-block;
+	padding-right:5px;
+	margin-bottom:10px;
+	margin-top:15px;
+}
+h2.headerwithextra+span.afterheader {
+	color: var(--text-color-tertiary);
+}
+
+/* SHINY*/
+
+
+.shimmer {
+	margin: 0 auto;
+  padding: 0 140px 0 0;
+  display: inline;
+  margin-bottom: 0;
+	color: rgba(255,255,255,0.1);
+	background: -webkit-gradient(linear, left top, right top, from(#222), to(#222), color-stop(0.5, #fff));
+  background: -moz-gradient(linear, left top, right top, from(#222), to(#222), color-stop(0.5, #fff));
+  background: gradient(linear, left top, right top, from(#222), to(#222), color-stop(0.5, #fff));
+	-webkit-background-size: 125px 100%;
+  -moz-background-size: 125px 100%;
+  background-size: 125px 100%;
+	-webkit-background-clip: text;
+  -moz-background-clip: text;
+  background-clip: text;
+  animation-name: shimmer;
+  animation-duration: 2s;
+  animation-iteration-count: infinite;
+  background-repeat: no-repeat;
+  background-position: 0 0;
+  background-color: #222;
+}
+@keyframes shimmer {
+  0% {
+    background-position: top left;
+  }
+  100% {
+    background-position: top right;
+  }
+}
+
+
+
+.medal {
+	top:5px;
+	font-size:80%;
+	padding:3px;
+	margin:2px;
+	border-radius:2px;
+	color:black;
+	--shine-color: 255, 255, 255;
+	background-color: rgba(var(--rank-color),1);
+}
+.medal.gold {
+    --rank-color: var(--color-rank-gold);
+}
+.medal.silver {
+    --rank-color: var(--color-rank-silver);
+}
+.medal.bronze {
+    --rank-color: var(--color-rank-bronze);
+}
+
+.shiny {
+	overflow: hidden;
+	position:relative;
+	display: inline-block;
+}
+
+.alwaysshiny {
+    /* alwaysshiny elements in general use the certification color for their shine */
+    --shine-color: var(--certification-color);
+}
+
+.shiny:after {
+  content: "";
+  position: absolute;
+  top: -110%;
+  left: -210%;
+  width: 200%;
+  height: 200%;
+  opacity: 0;
+  transform: rotate(30deg);
+
+  background: rgba(255, 255, 255, 0.13);
+  background: linear-gradient(
+    to right,
+    rgba(var(--shine-color), 0.0) 0%,
+    rgba(var(--shine-color), 0.13) 77%,
+    rgba(var(--shine-color), 0.5) 92%,
+    rgba(var(--shine-color), 0.0) 100%
+    /* shiny things just use the shine-color var, they are unaware of cert status directly */
+  );
+}
+.shiny.hovershiny:hover:after {
+  opacity: 1;
+  top: -30%;
+  left: -30%;
+  transition-property: left, top, opacity;
+  transition-duration: 0.7s, 0.7s, 0.15s;
+  transition-timing-function: ease;
+}
+.shiny.hovershiny:active:after {
+  opacity: 0;
+}
+.shiny.alwaysshiny:after {
+    animation: shiny 9s infinite linear;
+}
+
+
+@keyframes shiny {
+  0% {
+    top: -110%;
+    left: -210%;
+    opacity: 0;
+  }
+  50% {
+    top: -30%;
+    left: -30%;
+    opacity: 1;
+  }
+  100% {
+    top: -30%;
+    left: -30%;
+    opacity: 0;
+  }
+}
+
+
+
+
+img.certrecord {
+	height:30px;
+	vertical-align: text-bottom;
+}
+img.certrecord_small {
+	height:20px;
+	vertical-align: text-bottom;
+}
+
+img.star {
+	height:20px;
+	vertical-align: text-bottom;
+}
+
+
+
+
+button {
+	padding:3px;
+	padding-right:6px;
+	padding-left:6px;
+	border: 0px;
+	font-family: inherit;
+	font-size: inherit;
+	background-color: var(--button-color-bg);
+	color: var(--button-color-fg);
+	cursor:pointer;
+}
+button.warning {
+	background-color:red;
+	color:white;
+}
+button:hover {
+	background-color: var(--button-color-bg-focus);
+	color: var(--button-color-fg-focus);
+}
+button.warning:hover {
+	background-color:darkred;
+	color:white;
+}
+button.locked {
+	background-color:grey;
+	color:black;
+	cursor:not-allowed;
+}
+button.smallbutton {
+	padding:1px;
+	padding-right:2px;
+	padding-left:2px;
+	font-size: 80%;
+}
+
+
+
+/*
+**
+**
+** LISTS
+**
+**
+*/
+
+table.twopart {
+	width:100%;
+}
+table.twopart>tbody>tr>td {
+	width:50%;
+}
+
+
+
+/* only on startpage for now, implement this for all tables??? */
+section table.list {
+	max-width: 100%;
+	width: 100%;
+	table-layout: fixed;
+}
+
+
+table.list {
+	border-collapse:collapse;
+
+}
+
+table.list tr {
+    --current-bg-color: transparent;
+	background-color: var(--current-bg-color);
+	border-color: var(--current-bg-color);
+	height: 1.45em;
+	transition: opacity 2s;
+
+}
+
+
+table.list tr td {
+	padding-top:2px;
+	padding-bottom: 2px;
+
+	white-space: nowrap;
+	overflow:hidden;
+	text-overflow:ellipsis;
+	padding-right:15px;
+	/*line-height: 140%;*/
+
+}
+
+table.list tr:nth-child(even) {
+	--current-bg-color: rgba(255,255,255,0.05);
+	/* make rows distinguishable with respect to any bg color */
+}
+
+table.list tr:nth-child(4n) td {
+	border-bottom: 1px solid rgba(120,120,120,0.4);
+	padding-bottom: 1px;
+}
+table.list tr:nth-child(4n+1) td {
+	border-top: 1px solid rgba(120,120,120,0.4);
+	padding-top: 1px;
+}
+
+table.list tr:hover {
+	--current-bg-color: rgba(255,255,255,0.2);
+}
+
+table.list td.time {
+	width:9em;
+	color: var(--text-color-tertiary);
+}
+
+table.list td.timerange {
+	width:9em;
+}
+
+
+table.list tr td.rank {
+	padding-right: 4px;
+	width: 5em;
+
+}
+
+table.list tr td.rankup {
+	color:green;
+	padding-right: 8px;
+	font-size: 80%;
+}
+table.list tr td.rankdown {
+	color:red;
+	padding-right: 8px;
+	font-size: 80%;
+}
+table.list tr td.ranksame {
+	color:grey;
+	padding-right: 8px;
+	font-size: 80%;
+}
+
+
+table.list tr td.icon {
+	padding:0px;
+	padding-right:5px;
+	width:20px;
+}
+
+table.list td.icon div {
+	width:20px;
+	height:20px;
+	background-size:cover;
+	background-position:center;
+}
+
+table.list td.artists,td.artist,td.title,td.track {
+	min-width:500px;
+	max-width: 40em;
+
+}
+
+table.list td.track span.artist_in_trackcolumn {
+	color: var(--text-color-secondary);
+}
+
+table.list td.searchProvider {
+	width: 20px;
+	padding-right: 5px;
+}
+table.list td.searchProvider svg {
+	height:17px;
+}
+
+table.list td.searchProvider:hover {
+	color: gold;
+}
+
+table.list td.scrobble_action_area {
+	text-align: right;
+	width:2em;
+	overflow:visible;
+}
+
+table.list tr td.scrobble_action_area span.scrobble_action_type {
+	display:inline-block;
+	float:right;
+}
+
+table.list td.scrobble_action_area span.scrobble_action_type.active {
+}
+
+/* rows that can be deleted in some form
+	'active' class on the delete area cell to toggle confirm prompt
+	'removed' class on the whole row to delete
+*/
+table.list tr td.scrobble_action_area span.scrobble_action_type span.confirmactions {
+	display: none;
+}
+table.list tr td.scrobble_action_area span.scrobble_action_type span.initializeactions {
+	display: initial;
+}
+
+/* when other action is active, hide all */
+table.list tr td.scrobble_action_area.active span.scrobble_action_type span.initializeactions {
+	display: none;
+}
+table.list tr td.scrobble_action_area.active span.scrobble_action_type span.initializeactions {
+	display: none;
+}
+/* except this one itself is active */
+table.list tr td.scrobble_action_area.active span.scrobble_action_type.active span.confirmactions {
+	display: initial;
+}
+table.list tr td.scrobble_action_area.active span.scrobble_action_type.active span.initializeactions {
+	display: none;
+}
+
+table.list tr.removed td.scrobble_action_area span.scrobble_action_type {
+	display: none;
+}
+table.list tr.removed td.scrobble_action_area span.scrobble_action_type {
+	display: none;
+}
+table.list tr.removed {
+	text-decoration: line-through;
+	opacity:0.4;
+}
+
+
+table.list tr.changed {
+	/*background-color: rgba(222,209,180,0.7) !important;*/
+	opacity:0;
+	transition: opacity 0.2s;
+}
+
+
+/*
+table td.artists div {
+	overflow:hidden;
+	z-index:1;
+	position:relative;
+}
+
+table tr td.artists div span {
+	//text-overflow:ellipsis;
+	z-index:-2;
+	position:relative;
+	white-space:nowrap;
+
+}
+table tr:hover td.artists div span {
+	animation: bounce 3s linear infinite alternate;
+}
+@keyframes bounce {
+	0% {
+
+	}
+	100% {
+		//transform: translateX(-60px);
+		//margin-left:-60px;
+		margin-left:-100%;
+	}
+}
+
+**/
+
+table.list td.amount {
+	width:50px;
+	text-align:right;
+}
+table.list td.bar {
+	width:400px;
+	/* background-color: var(--base-color); */
+	/* Remove 5er separators for bars */
+	/*border-color:rgba(0,0,0,0)!important;*/
+}
+table.list td.bar div {
+	background-color: var(--text-color);
+	height:20px; /* can only do this absolute apparently */
+	position:relative;
+	display:inline-block;
+	margin-bottom:-3px;
+}
+table.list tr:hover td.bar div {
+	background-color: var(--text-color-focus);
+	cursor:pointer;
+}
+
+/* extra bar for associated */
+table.list td.bar a:nth-child(2) div {
+    opacity: 0.7;
+}
+table.list td.bar:hover a:nth-child(2) div {
+    /* when we start hovering over the bar, but not the associated part, go back to normal bg color */
+	background-color: var(--text-color);
+}
+table.list td.bar:hover a:nth-child(2) div:hover {
+    /* restore full color when hovering the associated part */
+    background-color: var(--text-color-focus);
+}
+
+
+table.list td.chart {
+	width:400px;
+	/* background-color: var(--base-color); */
+	/* Remove 5er separators for bars */
+	/*border-color:rgba(0,0,0,0)!important;*/
+}
+table.list td.chart div {
+	/*background-color:beige;
+	height:4px;
+	*/
+	height:20px;
+	background-color: var(--base-color-accent-dark);
+	border-radius: 0px 30px 30px 0px;
+	background-image:url("/media/chartpos_normal.png");
+	background-position: right;
+	background-repeat:no-repeat;
+	background-size: auto 100%;
+	position:relative;
+
+
+}
+table.list tr:hover td.chart div {
+	cursor:pointer;
+}
+
+table.list tr td.chart div.gold {
+	/*background-color:gold;*/
+	background-image:url("/media/chartpos_gold.png");
+}
+table.list tr td.chart div.silver {
+	/*background-color:silver;*/
+	background-image:url("/media/chartpos_silver.png");
+}
+table.list tr td.chart div.bronze {
+	/*background-color:#cd7f32;*/
+	background-image:url("/media/chartpos_bronze.png");
+}
+
+
+table.misc {
+	margin-left:20px;
+}
+
+table.misc td {
+		padding-right:20px;
+		color:#bbbbaa;
+	}
+
+	table.misc th {
+		text-align: left;
+	}
+	table.misc td.interaction {
+		width:65px;
+	}
+
+
+
+/*
+**
+**
+** IMAGE TILES
+**
+**
+*/
+
+
+
+div.tiles {
+    max-height: 600px;
+	display: grid;
+	grid-template-columns: repeat(18, calc(100% / 18));
+	grid-template-rows: repeat(6, calc(100% / 6));
+	grid-auto-flow: row dense;
+
+	aspect-ratio: 3 / 1;
+
+}
+
+div.tiles div {
+	height: 100%;
+	width: 100%;
+	background-size: cover;
+	background-position:top center;
+	overflow: hidden;
+}
+
+div.tiles:hover div {
+	opacity:0.5;
+	filter: grayscale(80%);
+}
+div.tiles:hover div:hover {
+	opacity:1;
+	filter: grayscale(0%);
+}
+
+div.tiles div.tile:nth-child(1) {
+	grid-column: span 6;
+	grid-row: span 6;
+
+	font-size:100%
+}
+
+div.tiles div.tile:nth-child(2),
+div.tiles div.tile:nth-child(3),
+div.tiles div.tile:nth-child(4),
+div.tiles div.tile:nth-child(5) {
+	grid-column: span 3;
+	grid-row: span 3;
+
+	font-size:80%
+}
+
+div.tiles div.tile:nth-child(2),
+div.tiles div.tile:nth-child(4) {
+	grid-column-start: 7;
+	grid-column-end: span 3;
+}
+div.tiles div.tile:nth-child(3),
+div.tiles div.tile:nth-child(5) {
+	grid-column-start: 10;
+	grid-column-end: span 3;
+}
+
+div.tiles div.tile:nth-child(6),
+div.tiles div.tile:nth-child(7),
+div.tiles div.tile:nth-child(8),
+div.tiles div.tile:nth-child(9),
+div.tiles div.tile:nth-child(10),
+div.tiles div.tile:nth-child(11),
+div.tiles div.tile:nth-child(12),
+div.tiles div.tile:nth-child(13),
+div.tiles div.tile:nth-child(14) {
+	grid-column: span 2;
+	grid-row: span 2;
+
+	font-size:60%
+}
+
+
+div.tiles span {
+	background-color:rgba(0,0,0,0.7);
+	display: inline-block;
+	margin-top:2%;
+	padding: 3px;
+	max-width: 67%;
+	vertical-align: text-top;
+}
+div.tiles span {
+        overflow-wrap: anywhere;
+}
+
+div.tiles p.scrobbles {
+	margin: 0;
+	top:100%;
+	position: sticky;
+}
+
+div.tiles a:hover {
+	text-decoration: none;
+}
+
+
+
+
+
+
+
+
+
+
+div#showcase_container {
+		display: flex;
+		margin-top: -15px;
+		padding-bottom: 20px;
+		align-items: flex-start;
+		flex-wrap: wrap;
+}
+
+div#showcase_container table.album {
+	width: 180px;
+}
+
+div#showcase_container table.album tr td {
+	padding-left: 15px;
+	padding-right: 15px;
+}
+div#showcase_container table.album tr:nth-child(1) td {
+	height:8px;
+	opacity: 0.3;
+	text-align: center;
+}
+div#showcase_container table.album tr:nth-child(2) td {
+	height:150px;
+	padding-top:2px;
+	padding-bottom:2px;
+}
+div#showcase_container table.album tr:nth-child(3) td {
+	height:15px;
+}
+div#showcase_container div {
+	height: 150px;
+	width: 150px;
+
+	background-size: cover;
+	background-position: top;
+
+	box-shadow: 0px 0px 10px 10px rgba(0,0,0,0.5);
+}
+
+div#showcase_container table:hover div {
+	box-shadow: 0px 0px 10px 10px var(--ctrl-element-color-main);
+}
+
+div#showcase_container span.album_artists {
+	font-size: 80%;
+}
+div#showcase_container span.album_title {
+	font-weight: bold;
+}
+
+
+.summary_rank {
+	background-size:cover;
+	background-position:center;
+	display: inline-block;
+}
+
+.summary_rank_1 {
+	width:300px;
+	height:300px;
+	border: 6px solid gold;
+}
+.summary_rank_2 {
+	width:250px;
+	height:250px;
+	border: 4px solid silver;
+}
+.summary_rank_3 {
+	width:240px;
+	height:240px;
+	border: 3px solid #cd7f32;
+}
+
+
+
+
+/*
+**
+**
+** Pulse / performance thingies
+**
+**
+*/
+
+span.stat_module_pulse, span.stat_module_topartists, span.stat_module_toptracks {
+	display: inline-block;
+	vertical-align: top;
+}

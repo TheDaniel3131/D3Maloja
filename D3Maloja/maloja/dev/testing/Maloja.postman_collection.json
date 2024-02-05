@@ -1,0 +1,912 @@
+{
+	"info": {
+		"_postman_id": "71b19d5e-78a1-4a4a-98b5-12cbf2f13fe6",
+		"name": "Maloja",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Scrobbling",
+			"item": [
+				{
+					"name": "Scrobble Native",
+					"item": [
+						{
+							"name": "Query String",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": []
+								},
+								"url": {
+									"raw": "{{url}}/apis/mlj_1/newscrobble?key={{api_key}}&artist={{data.artist1}}&title={{data.title1}}&artist={{data.artist2}}",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"apis",
+										"mlj_1",
+										"newscrobble"
+									],
+									"query": [
+										{
+											"key": "key",
+											"value": "{{api_key}}"
+										},
+										{
+											"key": "artist",
+											"value": "{{data.artist1}}"
+										},
+										{
+											"key": "title",
+											"value": "{{data.title1}}"
+										},
+										{
+											"key": "artist",
+											"value": "{{data.artist2}}"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Query String Redirect",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"url": {
+									"raw": "{{url}}/api/newscrobble?key={{api_key}}&artist={{data.artist1}}&title={{data.title1}}&artist={{data.artist2}}",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"api",
+										"newscrobble"
+									],
+									"query": [
+										{
+											"key": "key",
+											"value": "{{api_key}}"
+										},
+										{
+											"key": "artist",
+											"value": "{{data.artist1}}"
+										},
+										{
+											"key": "title",
+											"value": "{{data.title1}}"
+										},
+										{
+											"key": "artist",
+											"value": "{{data.artist2}}"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Formdata",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "key",
+											"value": "{{api_key}}",
+											"type": "text"
+										},
+										{
+											"key": "artist",
+											"value": "{{data.artist1}}",
+											"type": "text"
+										},
+										{
+											"key": "title",
+											"value": "{{data.title1}}",
+											"type": "text"
+										},
+										{
+											"key": "artist",
+											"value": "{{data.artist2}}",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{url}}/apis/mlj_1/newscrobble",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"apis",
+										"mlj_1",
+										"newscrobble"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Formdata Redirect",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "key",
+											"value": "{{api_key}}",
+											"type": "text"
+										},
+										{
+											"key": "artist",
+											"value": "{{data.artist1}}",
+											"type": "text"
+										},
+										{
+											"key": "title",
+											"value": "{{data.title1}}",
+											"type": "text"
+										},
+										{
+											"key": "artist",
+											"value": "{{data.artist2}}",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{url}}/api/newscrobble",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"api",
+										"newscrobble"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "JSON",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"key\": \"{{api_key}}\",\n    \"artist\": \"{{data.artist1}}\",\n    \"title\": \"{{data.title1}}\",\n    \"album\": \"{{data.album}}\",\n    \"albumartists\":[\n        \"{{data.artist1}}\",\n        \"{{data.artist3}}\"\n    ]\n}"
+								},
+								"url": {
+									"raw": "{{url}}/apis/mlj_1/newscrobble",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"apis",
+										"mlj_1",
+										"newscrobble"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "JSON Multiartist",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"type": "text",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"key\": \"{{api_key}}\",\n    \"artists\": [\"{{data.artist1}}\",\"{{data.artist2}}\"],\n    \"title\": \"{{data.title1}}\",\n    \"album\": \"{{data.album}}\",\n    \"albumartists\":[\n        \"{{data.artist1}}\",\n        \"{{data.artist3}}\"\n    ]\n}"
+								},
+								"url": {
+									"raw": "{{url}}/apis/mlj_1/newscrobble",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"apis",
+										"mlj_1",
+										"newscrobble"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "JSON Redirect",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"type": "text",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"key\": \"{{api_key}}\",\n    \"artist\": \"{{data.artist1}}\",\n    \"title\": \"{{data.title1}}\"\n}"
+								},
+								"url": {
+									"raw": "{{url}}/api/newscrobble",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"api",
+										"newscrobble"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Scrobble Listenbrainz",
+					"item": [
+						{
+							"name": "JSON",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "Authorization",
+										"value": "token {{api_key}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"listen_type\":\"single\",\n\t\"payload\":[\n\t\t{\n\t\t\t\"track_metadata\":{\n\t\t\t\t\"artist_name\":\"{{data.artist1}}\",\n\t\t\t\t\"track_name\":\"{{data.title1}}\"\n\t\t\t}\n\t\t}\n\t]\n}"
+								},
+								"url": {
+									"raw": "{{url}}/apis/listenbrainz/1/submit-listens",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"apis",
+										"listenbrainz",
+										"1",
+										"submit-listens"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "JSON Redirect",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"type": "text",
+										"value": "application/json"
+									},
+									{
+										"key": "Authorization",
+										"type": "text",
+										"value": "token {{api_key}}"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"listen_type\":\"single\",\n\t\"payload\":[\n\t\t{\n\t\t\t\"track_metadata\":{\n\t\t\t\t\"artist_name\":\"{{data.artist1}}\",\n\t\t\t\t\"track_name\":\"{{data.title1}}\"\n\t\t\t}\n\t\t}\n\t]\n}"
+								},
+								"url": {
+									"raw": "{{url}}/api/s/listenbrainz/1/submit-listens",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"api",
+										"s",
+										"listenbrainz",
+										"1",
+										"submit-listens"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Scrobble Audioscrobbler",
+					"item": [
+						{
+							"name": "JSON",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											""
+										],
+										"type": "text/javascript"
+									}
+								},
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"method\":\"track.scrobble\",\n\t\"artist\":\"{{data.artist1}}\",\n\t\"track\":\"{{data.title1}}\",\n\t\"sk\":\"{{session_key}}\"\n}"
+								},
+								"url": {
+									"raw": "{{url}}/apis/audioscrobbler/2.0/",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"apis",
+										"audioscrobbler",
+										"2.0",
+										""
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "JSON Redirect",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"type": "text",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"method\":\"track.scrobble\",\n\t\"artist\":\"{{data.artist1}}\",\n\t\"track\":\"{{data.title1}}\",\n\t\"sk\":\"{{session_key}}\"\n}"
+								},
+								"url": {
+									"raw": "{{url}}/api/s/audioscrobbler/2.0/",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"api",
+										"s",
+										"audioscrobbler",
+										"2.0",
+										""
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Authorize",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"var data = JSON.parse(responseBody);",
+											"pm.environment.set(\"session_key\", data.session.key);",
+											"tests[\"gotkey\"] = true;"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"method\":\"auth.getMobileSession\",\n\t\"authToken\":\"abc\",\n\t\"username\":\"someguy\",\n\t\"password\":\"{{api_key}}\"\n}"
+								},
+								"url": {
+									"raw": "{{url}}/apis/audioscrobbler/2.0/",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"apis",
+										"audioscrobbler",
+										"2.0",
+										""
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Scrobble Audioscrobbler Legacy",
+					"item": [
+						{
+							"name": "Authorize",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"var data = responseBody.split(\"\\n\");",
+											"",
+											"pm.environment.set(\"session_key\", data[1]);",
+											"pm.environment.set(\"scrobble_url\", data[3]);"
+										],
+										"type": "text/javascript"
+									}
+								},
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											"apikey = pm.variables.get(\"api_key\");",
+											"ts = pm.variables.get(\"data.timestamp1\");",
+											"",
+											"token = CryptoJS.MD5(CryptoJS.MD5(apikey) + ts).toString()",
+											"pm.environment.set(\"legacy_token\", token);"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"url": {
+									"raw": "{{url}}/apis/audioscrobbler_legacy/?hs=true&t={{data.timestamp1}}&a={{legacy_token}}",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"apis",
+										"audioscrobbler_legacy",
+										""
+									],
+									"query": [
+										{
+											"key": "hs",
+											"value": "true"
+										},
+										{
+											"key": "t",
+											"value": "{{data.timestamp1}}"
+										},
+										{
+											"key": "a",
+											"value": "{{legacy_token}}"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Scrobble",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{scrobble_url}}?s={{session_key}}&a[0]={{data.artist1}}&t[0]={{data.title1}}&a[1]={{data.artist2}}&t[1]={{data.title2}}&i[0]={{data.timestamp1}}&i[1]={{data.timestamp2}}",
+									"host": [
+										"{{scrobble_url}}"
+									],
+									"query": [
+										{
+											"key": "s",
+											"value": "{{session_key}}"
+										},
+										{
+											"key": "a[0]",
+											"value": "{{data.artist1}}"
+										},
+										{
+											"key": "t[0]",
+											"value": "{{data.title1}}"
+										},
+										{
+											"key": "a[1]",
+											"value": "{{data.artist2}}"
+										},
+										{
+											"key": "t[1]",
+											"value": "{{data.title2}}"
+										},
+										{
+											"key": "i[0]",
+											"value": "{{data.timestamp1}}"
+										},
+										{
+											"key": "i[1]",
+											"value": "{{data.timestamp2}}"
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "Metadata",
+			"item": [
+				{
+					"name": "Spotify",
+					"item": [
+						{
+							"name": "Authorize",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											"apiid = pm.collectionVariables.get(\"external.spotify.api_id\");",
+											"apisecret = pm.collectionVariables.get(\"external.spotify.api_secret\");",
+											"",
+											"authb64 = new Buffer(apiid + ':' + apisecret).toString('base64');",
+											"pm.environment.set(\"authb64\", authb64);",
+											""
+										],
+										"type": "text/javascript"
+									}
+								},
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"var data = JSON.parse(responseBody);",
+											"pm.collectionVariables.set(\"external.spotify.access_token\", data.access_token);"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Basic {{authb64}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "urlencoded",
+									"urlencoded": [
+										{
+											"key": "grant_type",
+											"value": "client_credentials",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "https://accounts.spotify.com/api/token",
+									"protocol": "https",
+									"host": [
+										"accounts",
+										"spotify",
+										"com"
+									],
+									"path": [
+										"api",
+										"token"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Track Info Old",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "https://api.spotify.com/v1/search?type=track&access_token={{external.spotify.access_token}}&q=artist:{{data.artist3}} track:{{data.title3}}",
+									"protocol": "https",
+									"host": [
+										"api",
+										"spotify",
+										"com"
+									],
+									"path": [
+										"v1",
+										"search"
+									],
+									"query": [
+										{
+											"key": "type",
+											"value": "track"
+										},
+										{
+											"key": "access_token",
+											"value": "{{external.spotify.access_token}}"
+										},
+										{
+											"key": "q",
+											"value": "artist:{{data.artist3}} track:{{data.title3}}"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Track Info New",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer {{external.spotify.access_token}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "https://api.spotify.com/v1/search?type=track&q=artist:{{data.artist3}}%20track:{{data.title3}}",
+									"protocol": "https",
+									"host": [
+										"api",
+										"spotify",
+										"com"
+									],
+									"path": [
+										"v1",
+										"search"
+									],
+									"query": [
+										{
+											"key": "type",
+											"value": "track"
+										},
+										{
+											"key": "q",
+											"value": "artist:{{data.artist3}}%20track:{{data.title3}}"
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "Scrobbleforward",
+			"item": [
+				{
+					"name": "Last.fm",
+					"item": [
+						{
+							"name": "Authorize",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "urlencoded",
+									"urlencoded": []
+								},
+								"url": {
+									"raw": "https://ws.audioscrobbler.com/2.0/?method=auth.getMobileSession&username={{external.lastfm.username}}&password={{external.lastfm.password}}&api_key={{external.lastfm.api_key}}&api_sig=TODO",
+									"protocol": "https",
+									"host": [
+										"ws",
+										"audioscrobbler",
+										"com"
+									],
+									"path": [
+										"2.0",
+										""
+									],
+									"query": [
+										{
+											"key": "method",
+											"value": "auth.getMobileSession"
+										},
+										{
+											"key": "username",
+											"value": "{{external.lastfm.username}}"
+										},
+										{
+											"key": "password",
+											"value": "{{external.lastfm.password}}"
+										},
+										{
+											"key": "api_key",
+											"value": "{{external.lastfm.api_key}}"
+										},
+										{
+											"key": "api_sig",
+											"value": "TODO"
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					"var current_timestamp = Math.floor(Date.now() / 1000);",
+					"pm.collectionVariables.set(\"data.timestamp1\", current_timestamp);",
+					"pm.collectionVariables.set(\"data.timestamp2\", current_timestamp - 200);"
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "url",
+			"value": "http://localhost:42010"
+		},
+		{
+			"key": "api_key",
+			"value": "localdevtestkey"
+		},
+		{
+			"key": "session_key",
+			"value": ""
+		},
+		{
+			"key": "data.artist1",
+			"value": "EXID ft. Jeremy Soule"
+		},
+		{
+			"key": "data.artist2",
+			"value": "BLACKPINK ft. Tzuyu"
+		},
+		{
+			"key": "data.artist3",
+			"value": "TWICE"
+		},
+		{
+			"key": "data.title1",
+			"value": "Why is the Rum gone?"
+		},
+		{
+			"key": "data.title2",
+			"value": "POP/STARS"
+		},
+		{
+			"key": "data.title3",
+			"value": "One in a Million"
+		},
+		{
+			"key": "data.album",
+			"value": "The Epic Collection",
+			"type": "default"
+		},
+		{
+			"key": "data.timestamp1",
+			"value": ""
+		},
+		{
+			"key": "data.timestamp2",
+			"value": ""
+		},
+		{
+			"key": "external.spotify.api_id",
+			"value": ""
+		},
+		{
+			"key": "external.spotify.api_secret",
+			"value": ""
+		},
+		{
+			"key": "external.spotify.access_token",
+			"value": ""
+		},
+		{
+			"key": "external.lastfm.username",
+			"value": ""
+		},
+		{
+			"key": "external.lastfm.password",
+			"value": ""
+		},
+		{
+			"key": "external.lastfm.api_key",
+			"value": ""
+		},
+		{
+			"key": "external.lastfm.secret",
+			"value": ""
+		}
+	]
+}

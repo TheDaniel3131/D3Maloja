@@ -1,0 +1,43 @@
+In this folder, you can save custom images for artists and tracks in case you
+don't like the ones provided by Last.FM, you don't want to use Last.FM or it's
+missing some artists / tracks that are important to you.
+
+For artists, you can use a .jpg, .jpeg, .png or .gif image that is named like
+the artist, but with all non-alphanumeric characters removed. You may also chose
+the safe route and omit everything but numbers and latin characters (except the
+dot separating the name and the extension). You can either capitalize exactly as
+the title or use only lower case, but not use arbitrary capizalization. In case
+you want to have multiple images of the same format, you may create a folder
+named like the artist and add any images inside. So, for example, if your artist
+is "Dal★Shabet", all these files would be considered:
+
+DalShabet.jpg
+dalshabet.png
+DalShabet/bestimage.jpeg
+dalshabet/serri_only.png
+
+The following files would not be considered:
+
+Dal★Shabet.png			(non-alphanumeric character)
+Dalshabet.gif			(wrong capitalization)
+DalShabet.webm			(wrong extension)
+DalShabet/SomeoneLikeU_MV.mp4	(wrong extension)
+Dal★Shabet/party.png		(non-alphanumeric character in folder)
+
+
+
+The same concept applies to tracks, however their name consists of all artists
+joined by a dash (-), then an underscore (_) and the track title. Artists should
+be joined in alphabetical order, but filenames with the wrong order might still
+work for a low artist number. Rules as above apply, so if your track was named
+"Epic Crossover 파티 협동" and it was performed by HyunA, Dal★Shabet and Taylor
+Swift, the following files would be considered:
+
+DalShabet-HyunA-TaylorSwift_EpicCrossover.jpg
+DalShabet-TaylorSwift-HyunA_EpicCrossover파티협동.png
+dalshabet-hyuna-taylorswift_epiccrossover/albumcover.png
+DalShabet-HyunA-TaylorSwift_EpicCrossover파티협동/dancing.gif
+
+Not accepted would be:
+
+DalShabet-HyunA-Taylor Swift_epiccrossover.jpg			(wrong capitalization)

@@ -1,0 +1,27 @@
+{% import 'snippets/links.jinja' as links %}
+
+{% set ranges = dbc.get_performance(filterkeys,limitkeys,delimitkeys,specialkeys) %}
+
+{% set minrank = ranges|map(attribute="rank")|reject("none")|max|default(60) %}
+{% set minrank = minrank + 20 %}
+{% if minrank < 80 %}{% set minrank = 80 %}{% endif %}
+
+<table class="list">
+	{% for t in ranges %}
+
+	{% set thisrange = t.range %}
+	<tr>
+		<td class="timerange">{{ thisrange.desc() }}</td>
+		<td class="rank">
+			{{ links.link_rank(filterkeys,specialkeys,thisrange,rank=t.rank) }}
+		</td>
+		<td class="chart">
+			{% set prct = ((minrank+1-t.rank)*100/minrank if t.rank is not none else 0) %}
+			{{ links.link_rank(filterkeys,specialkeys,thisrange,percent=prct,rank=t.rank) }}
+		</td>
+
+
+
+	</tr>
+	{% endfor %}
+</table>

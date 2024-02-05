@@ -1,0 +1,14 @@
+# temporary / generated files
+*.pyc
+
+# environments / builds
+.venv/*
+testdata*
+/dist
+/build
+/*.egg-info
+
+# dev files
+*.xcf
+*.note
+*-old

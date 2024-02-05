@@ -1,0 +1,134 @@
+{% set page ='admin_setup' %}
+{% extends "abstracts/admin.jinja" %}
+{% block title %}Maloja - Setup{% endblock %}
+
+{% block scripts %}
+
+	<script>
+
+
+		function replaceurls() {
+			url = window.location.origin;
+			s = document.getElementsByName("serverurl");
+			for (var i=0;i<s.length;i++) {
+				s[i].innerHTML = url;
+			}
+		}
+
+
+		function replace() {
+			replaceurls();
+		}
+
+		function activateRuleModule(e,filename) {
+			keys = "filename=" + encodeURIComponent(filename);
+			console.log(keys);
+			var xhttp = new XMLHttpRequest();
+			xhttp.open("POST","/api/importrules", true);
+			xhttp.send(keys);
+
+			e.innerHTML = e.innerHTML.replace("Add","Remove");
+			e.getAttributeNode("onclick").value = e.getAttribute("onclick").replace("activate","deactivate");
+			/* Nobody ever look at this code please */
+		}
+
+		function deactivateRuleModule(e,filename) {
+			keys = "remove&filename=" + encodeURIComponent(filename);
+
+			var xhttp = new XMLHttpRequest();
+			xhttp.open("POST","/api/importrules", true);
+			xhttp.send(keys);
+
+			e.innerHTML = e.innerHTML.replace("Remove","Add");
+			e.getAttributeNode("onclick").value = e.getAttribute("onclick").replace("deactivate","activate");
+		}
+
+		document.addEventListener("DOMContentLoaded",replace);
+	</script>
+{% endblock %}
+
+{% set rulesets = dbc.get_predefined_rulesets() %}
+
+{% block maincontent %}
+
+
+	<h2>Start Scrobbling</h2>
+
+	If you use a Chromium-based browser and listen to music on Plex, Spotify, Soundcloud, Bandcamp or YouTube Music, download the extension and simply enter the server URL as well as your API key in the relevant fields. They will turn green if the server is accessible.
+	<br/><br/>
+	You can also use any standard-compliant scrobbler. For GNUFM (audioscrobbler) scrobblers, enter <span class="stats"><span name="serverurl">yourserver.tld</span>/apis/audioscrobbler</span> as your Gnukebox server and your API key as the password. For Listenbrainz scrobblers, use <span class="stats"><span name="serverurl">yourserver.tld</span>/apis/listenbrainz</span> as the API URL (depending on the implementation, you might need to add a <span class="stats">/1</span> at the end) and your API key as token.
+	<br/><br/>
+	If you use another browser or another music player, you could try to code your own extension. The API is super simple! Just send a POST HTTP request to
+
+	<span class="stats"><span name="serverurl">yourserver.tld</span>/apis/mlj_1/newscrobble</span>
+
+	(make sure to use the public URL) with the following values encoded as JSON:
+	<br/>
+	<br/>
+	<table class="misc">
+		<tr>	<td>artists</td>		<td><i>List of artist names</i></td>	</tr>
+		<tr>	<td>title</td>			<td><i>Song title</i></td>	</tr>
+		<tr>	<td>album</td>			<td><i>Album title - optional</i></td>	</tr>
+		<tr>	<td>albumartists</td>	<td><i>List of album artists - optional</i></td>	</tr>
+		<tr>	<td>duration</td>		<td><i>Duration of play in seconds - optional</i></td>	</tr>
+		<tr>	<td>length</td>			<td><i>Full length of the track in seconds - optional</i></td>	</tr>
+		<tr>	<td>time</td>			<td><i>UNIX timestamp - optional, defaults to time of request</i></td>	</tr>
+		<tr>	<td>fix</td>			<td><i>Set this to false to skip server-side metadata fixing - optional</i></td>	</tr>
+
+		<tr>	<td>key</td>			<td><i>API Key, see <a class="textlink" href="/admin_apikeys">API Keys</a></i></td>	</tr>
+	</table>
+	<br/><br/>
+	Finally, you could always <a class="textlink" href="/admin_manual">manually scrobble</a>!
+
+	<br/><br/>
+
+	<h2>Import your Last.FM data</h2>
+
+	Switching from Last.fm? <a class="textlink" href="https://benjaminbenben.com/lastfm-to-csv/">Download all your data</a> and run the command <span class="stats">maloja import <i>(the file you just downloaded)</i></span>.<br/>
+	You can also try out <a class="textlink" href="https://github.com/FoxxMD/multi-scrobbler">Multi-Scrobbler</a> to import scrobbles from a wider range of sources.
+	<br/><br/>
+
+	<h2>Set up some rules</h2>
+
+	You can add some rules in your server's "rules" directory - just add your own .tsv file and read the instructions on how to declare a rule.
+	<br/><br/>
+
+	You can also set up some predefined rulesets right away!
+	<br/>
+
+	<br/><br/>
+	<table class='misc'>
+		<tr>
+			<th></th>
+			<th>Module</th>
+			<th>Author</th>
+			<th>Description</th>
+		</tr>
+		{% for rs in rulesets %}
+		<tr>
+			{% if rs.active %}
+			<td class='interaction' onclick=deactivateRuleModule(this,'{{ rs.file }}')><a class='textlink'>Remove:</a></td>
+			{% else %}
+			<td class='interaction' onclick=activateRuleModule(this,'{{ rs.file }}')><a class='textlink'>Add:</a></td>
+			{% endif %}
+			<td>{{ rs.name }}</td>
+			<td>{{ rs.author }}</td>
+			<td>{{ rs.desc }}</td>
+		</tr>
+		{% endfor %}
+	</table>
+
+	<br/><br/>
+
+	<h2>Say thanks</h2>
+
+	Donations are never required, but always appreciated. If you really like Maloja, you can fund my next Buttergipfel via
+	<a class="textlink" target="_blank" rel="noopener noreferrer" href="https://paypal.me/krateng">PayPal</a> or <a class="textlink" href="bitcoin:1krat8JMniJBTiHftMfR1LtF3Y1w5DAxx">Bitcoin</a>.
+
+	<br/><br/>
+
+	<h2>View your stats</h2>
+
+	Done! Visit <a class="textlink" href="/"><span name="serverurl">yourserver.tld</span></a> (or your public / proxy URL) to look at your overview page. Almost everything is clickable!
+
+{% endblock %}

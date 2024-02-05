@@ -1,0 +1,51 @@
+minor_release_name: "Yeonhee"
+3.0.0:
+    commit: "f31c95228eb2dc01e661be928ffd881c063377da"
+    notes:
+    - "[Architecture] Switched to SQLite for main database"
+    - "[Architecture] Switched to SQLite for artwork cache"
+    - "[Feature] Added scrobble deletion from web interface"
+3.0.1:
+    commit: "700b81217cb585df631d6f069243c56074cd1b71"
+    notes:
+    - "[Bugfix] Fixed upgrading imported scrobbles"
+3.0.2:
+    commit: "4a8221f7a08f679b21c1fb619f03e5f922a1dc2b"
+    notes:
+    - "[Logging] Cleaned up output for waitress warnings"
+    - "[Bugfix] Fixed exception in native API"
+3.0.3:
+    commit: "1d9247fc724d7410b6e50d2cbfaa8f375d5e70af"
+    notes:
+    - "[Documentation] Added descriptions for native API endpoints"
+    - "[Code Health] Made arguments for native API scrobbling explicit"
+    - "[Bugfix] Fixed faulty entity type recognition for artists including the string 'artists'"
+    - "[Bugfix] Fixed OS return codes"
+3.0.4:
+    commit: "206ebd58ea204e0008f2c9bf72d76dd9918fec53"
+    notes:
+    - "[Feature] Enabled dual stack for web server"
+    - "[Feature] Added better feedback to native API endpoints"
+    - "[Bugfix] Fixed native API receiving superfluous keywords"
+    - "[Bugfix] Fixed crash when importing scrobbles with artists with similar names"
+3.0.5:
+    commit: "fe21894c5ecf3a53c9c5c00453abfc7f41c6a83e"
+    notes:
+    - "[Feature] Added notification system for web interface"
+    - "[Bugfix] Fixed crash when encountering error in Lastfm import"
+3.0.6:
+    commit: "b3d4cb7a153845d1f5a5eef67a6508754e338f2f"
+    notes:
+    - "[Performance] Implemented search in database"
+    - "[Bugfix] Better parsing of featuring artists"
+    - "[Bugfix] Fixed buffered output in Docker"
+    - "[Bugfix] Fixed importing a Spotify file without path"
+    - "[Bugfix] No longer releasing database lock during scrobble creation"
+    - "[Distribution] Experimental arm64 image"
+3.0.7:
+    commit: "62abc319303a6cb6463f7c27b6ef09b76fc67f86"
+    notes:
+    - "[Bugix] Improved signal handling"
+    - "[Bugix] Fixed constant re-caching of all-time stats, significantly increasing page load speed"
+    - "[Logging] Disabled cache information when cache is not used"
+    - "[Distribution] Experimental arm/v7 image"

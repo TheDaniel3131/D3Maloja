@@ -1,0 +1,86 @@
+{% set page ='admin_issues' %}
+{% extends "abstracts/admin.jinja" %}
+{% block title %}Maloja - Issues{% endblock %}
+
+{% import 'snippets/links.jinja' as links %}
+
+{% block scripts %}
+	<script>
+		function newrule() {
+			keys = "";
+			for (var i = 1; i < arguments.length; i++) {
+				keys += encodeURIComponent(arguments[i]) + "&";
+			}
+			console.log(keys);
+
+
+			var xhttp = new XMLHttpRequest();
+			xhttp.open("POST","/api/newrule?", true);
+			xhttp.send(keys);
+			e = arguments[0];
+			line = e.parentNode;
+			line.parentNode.removeChild(line);
+		}
+
+		function fullrebuild() {
+
+			var xhttp = new XMLHttpRequest();
+			xhttp.open("POST","/api/rebuild", true);
+			xhttp.send();
+			window.location = "/wait";
+
+		}
+	</script>
+{% endblock %}
+
+{% set issuedata = dbc.issues() %}
+
+{% block maincontent %}
+
+
+<p>Maloja can identify possible problems with consistency or redundancy in your library. After making any changes, you should <a class="textlink" onclick='fullrebuild()'>rebuild your library</a>.</p>
+
+<table class="list">
+
+{% if issuedata.inconsistent %}
+	<tr>
+		<td>The current database wasn't built with all current rules in effect. Any problem below might be a false alarm and fixing it could create redundant rules.</td>
+		<td><button type="button" class='warning' onclick="fullrebuild()">Rebuild the database</button></td>
+	</tr>
+{% endif %}
+
+{% for issue in issuedata.duplicates %}
+	<tr>
+		<td>{{ links.link(issue[0]) }} is a possible duplicate of {{ links.link(issue[1]) }}</td>
+		<td>
+			<button type="button" onclick="newrule(this,'replaceartist','{{ issue[0] }}','{{ issue[1] }}')">{{ issue[1] }} is correct</button>
+		</td>
+		<td>
+			<button type="button" onclick="newrule(this,'replaceartist','{{ issue[1] }}','{{ issue[0] }}')">{{ issue[0] }} is correct</button>
+		</td>
+	</tr>
+{% endfor %}
+
+{% for issue in issuedata.combined %}
+	<tr>
+		<td>{{ links.link(issue[0]) }} sounds like the combination of {{ issue[1].__len__() }} artists:
+			{{ issue[1]|join(", ") }}
+		</td>
+		<td>
+			<button type="button" onclick="newrule(this,'replaceartist','{{ issue[0] }}','{{ issue[1] | join('␟') }}')">Fix it</button>
+		</td>
+	</tr>
+{% endfor %}
+
+{% for issue in issuedata.newartists %}
+	<tr>
+		<td>Is '{{ issue[0] }}' in '{{ links.link(issue[1]) }}' an artist?</td>
+		<td>
+			<button type="button" onclick="newrule(this,'replaceartist','{{ issue[1] }}','{{ (issue[2] + [issue[0]]) | join('␟') }}')">Yes</button>
+		</td>
+	</tr>
+{% endfor %}
+
+</table>
+
+{% endblock %}

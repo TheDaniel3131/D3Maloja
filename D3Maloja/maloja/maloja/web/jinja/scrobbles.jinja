@@ -1,0 +1,49 @@
+{% extends "abstracts/base.jinja" %}
+{% block title %}Maloja - Scrobbles{% endblock %}
+
+{% import 'snippets/filterdescription.jinja' as filterdesc %}
+{% import 'snippets/pagination.jinja' as pagination %}
+
+{% set totalscrobbles = dbc.get_scrobbles_num(filterkeys,limitkeys) %}
+{% set scrobbles = dbc.get_scrobbles(filterkeys,limitkeys,amountkeys) %}
+{% set pages = math.ceil(totalscrobbles / amountkeys.perpage) %}
+
+{% if filterkeys.get('track') is not none %}
+	{% set img = images.get_track_image(filterkeys.track) %}
+{% elif filterkeys.get('artist') is not none %}
+	{% set img = images.get_artist_image(filterkeys.artist) %}
+{% elif scrobbles.__len__() > 0 %}
+	{% set img = images.get_track_image(scrobbles[0].track) %}
+{% else %}
+	{% set img = "/favicon.png" %}
+{% endif %}
+
+{% block content %}
+
+
+	<table class="top_info">
+		<tr>
+			<td class="image">
+				<div style="background-image:url('{{ img }}')"></div>
+			</td>
+			<td class="text">
+				<h1>Scrobbles</h1><br/>
+				{{ filterdesc.desc(filterkeys,limitkeys) }}
+				<br/>
+				<p class="stats">{{ totalscrobbles }} Scrobbles</p>
+				<br/>
+				{% with delimitkeys = {} %}
+				{% include 'snippets/timeselection.jinja' %}
+				{% endwith %}
+
+			</td>
+		</tr>
+	</table>
+
+
+	{% include 'partials/scrobbles.jinja' %}
+
+	{{ pagination.pagination(filterkeys,limitkeys,delimitkeys,amountkeys,pages) }}
+
+
+{% endblock %}

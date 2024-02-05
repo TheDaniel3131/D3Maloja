@@ -1,0 +1,52 @@
+{% macro medals(info) %}
+
+<!-- MEDALS -->
+{% for year in info.medals.gold -%}
+<a title="Best Track in {{ year }}" class="hidelink medal shiny hovershiny gold" href='/charts_tracks?max=50&amp;in={{ year }}'>
+	<span>{{ year }}</span>
+</a>
+{%- endfor %}
+{% for year in info.medals.silver -%}
+<a title="Second best Track in {{ year }}" class="hidelink medal shiny hovershiny silver" href='/charts_tracks?max=50&amp;in={{ year }}'>
+	<span>{{ year }}</span>
+</a>
+{%- endfor %}
+{% for year in info.medals.bronze -%}
+<a title="Third best Track in {{ year }}" class="hidelink medal shiny hovershiny bronze" href='/charts_tracks?max=50&amp;in={{ year }}'>
+	<span>{{ year }}</span>
+</a>
+{%- endfor %}
+
+{% if info.medals.gold or info.medals.silver or info.medals.bronze %}
+    <span class="spacer" ></span>
+{% endif %}
+
+{%- endmacro %}
+
+
+
+
+
+
+
+
+{% macro topweeks(info) %}
+
+{% set encodedtrack = mlj_uri.uriencode({'track':info.track}) %}
+
+<!-- TOPWEEKS -->
+<span>
+	{% if info.topweeks > 0 %}
+	<a title="{{ info.topweeks }} weeks on #1" href="/performance?{{ encodedtrack }}&step=week">
+		<img class="star" src="/media/star.png" />{{ info.topweeks }}
+	</a>
+	{% endif %}
+</span>
+
+{% if info.topweeks > 0 %}
+    <span class="spacer" ></span>
+{% endif %}
+
+{%- endmacro %}
+
+

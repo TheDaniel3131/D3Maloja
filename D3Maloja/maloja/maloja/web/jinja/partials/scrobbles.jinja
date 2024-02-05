@@ -1,0 +1,44 @@
+{% set scrobbles = dbc.get_scrobbles(filterkeys,limitkeys,amountkeys) %}
+
+{% set firstindex = amountkeys.page * amountkeys.perpage %}
+{% set lastindex = firstindex + amountkeys.perpage %}
+
+{% import 'snippets/entityrow.jinja' as entityrow %}
+
+
+<table class='list'>
+	{% for s in scrobbles -%}
+		<tr>
+			<td class='time'>{{ malojatime.timestamp_desc(s["time"],short=shortTimeDesc) }}</td>
+			{{ entityrow.row(s.track) }}
+			{% if adminmode %}
+
+			<td class='scrobble_action_area'>
+				<span class='scrobble_action_type'>
+					<span class="confirmactions">
+						<button class="smallbutton warning" onclick="reparseScrobble({{ s.time }},this)">Reparse</button>
+						<button class="smallbutton" onclick="toggleReparseConfirm(this)">Cancel</button>
+					</span>
+
+					<span class="initializeactions">
+						{% include 'icons/reparse.jinja' %}
+					</span>
+				</span>
+
+				<span class='scrobble_action_type'>
+
+					<span class="confirmactions">
+						<button class="smallbutton warning" onclick="deleteScrobble({{ s.time }},this)">Delete</button>
+						<button class="smallbutton" onclick="toggleDeleteConfirm(this)">Cancel</button>
+					</span>
+
+					<span class="initializeactions">
+						{% include 'icons/delete.jinja' %}
+					</span>
+				</span>
+
+			</td>
+			{% endif %}
+		</tr>
+	{% endfor %}
+</table>

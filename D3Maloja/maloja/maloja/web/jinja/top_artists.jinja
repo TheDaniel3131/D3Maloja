@@ -1,0 +1,34 @@
+{% extends "abstracts/base.jinja" %}
+{% block title %}Maloja - #1 Artists{% endblock %}
+
+{% import 'snippets/filterdescription.jinja' as filterdesc %}
+
+<!-- find representative -->
+
+{% set entries = dbc.get_top_artists(limitkeys,delimitkeys) %}
+{% set repr = entries | find_representative('artist','scrobbles') %}
+{% set img = "/favicon.png" if repr is none else images.get_artist_image(repr.artist) %}
+
+
+{% block content %}
+		<table class="top_info">
+			<tr>
+				<td class="image">
+					<div style="background-image:url('{{ img }}')"></div>
+				</td>
+				<td class="text">
+					<h1>#1 Artists</h1><br/>
+					{{ filterdesc.desc(filterkeys,limitkeys) }}
+
+					<br/><br/>
+					{% with artistchart = True %}
+					{% include 'snippets/timeselection.jinja' %}
+					{% endwith %}
+				</td>
+			</tr>
+		</table>
+
+
+		{% include 'partials/top_artists.jinja' %}
+
+{% endblock %}

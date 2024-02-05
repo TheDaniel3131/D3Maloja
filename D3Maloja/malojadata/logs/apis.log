@@ -1,0 +1,4 @@
+2024/02/05 06:13:03  Listenbrainz API request: []
+2024/02/05 06:13:03  Unhandled Exception with Listenbrainz API: <class 'UnboundLocalError'> (Request: [])
+2024/02/05 06:16:08  Listenbrainz API request: ['854c9316fd6e']
+2024/02/05 06:16:09  Error with Listenbrainz API: <class 'maloja.apis._exceptions.InvalidMethodException'> (Request: [])

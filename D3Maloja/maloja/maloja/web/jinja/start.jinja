@@ -1,0 +1,30 @@
+{% extends "abstracts/base.jinja" %}
+{% block title %}Maloja{% endblock %}
+
+{% block scripts %}
+
+<script src="/statselect.js"></script>
+
+	<link rel="stylesheet" href="/static/css/startpage.css" />
+{% endblock %}
+
+{% block content -%}
+
+	<div id="startpage">
+
+
+	{% for module in ['charts_artists','charts_tracks','charts_albums','pulse','lastscrobbles'] %}
+	<section id="start_page_module_{{ module }}" style="grid-area: {{ module }}">
+	<!-- MODULE: {{ module }} -->
+
+	{% include 'startpage_modules/' + module + '.jinja' %}
+
+
+	<!-- END MODULE: {{ module }} -->
+	</section>
+	{% endfor %}
+
+	</div>
+
+
+{%- endblock %}

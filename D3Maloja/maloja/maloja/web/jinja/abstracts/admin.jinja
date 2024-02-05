@@ -1,0 +1,48 @@
+{% extends "abstracts/base.jinja" %}
+{% block title %}Maloja - Backend{% endblock %}
+
+
+{% block content %}
+
+
+
+
+	<table class="top_info">
+		<tr>
+			<td class="image">
+				<div style="background-image:url('/favicon.png')"></div>
+			</td>
+			<td class="text">
+				<h1>Admin Panel</h1>
+				<br/>
+				<span>
+					{% for tab_url,tab_name in [
+						['overview','Overview'],
+						['setup','Server Setup'],
+						['settings','Settings'],
+						['apikeys','API Keys'],
+						['manual','Manual Scrobbling'],
+						['albumless','Tracks without Albums']
+
+					] %}
+					{# ['import','Scrobble Import'],
+					  	['issues','Database Maintenance']
+					hide for now #}
+						{% if page=='admin_' + tab_url %}
+							<span style="opacity:0.5;">{{ tab_name }}</span>
+						{% else %}
+							<a href="/admin_{{ tab_url }}">{{ tab_name }}</a>
+						{% endif %} {%- if not loop.last %}|{% endif %}
+					{% endfor %}
+
+
+				</span>
+				<br/><br/>
+
+			</td>
+		</tr>
+	</table>
+
+	{% block maincontent %}
+	{% endblock %}
+{% endblock %}

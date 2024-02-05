@@ -1,0 +1,42 @@
+{% extends "abstracts/base.jinja" %}
+{% block title %}Maloja - Please wait...{% endblock %}
+
+{% block heading %}Rebuilding the database{% endblock %}
+
+{% block top_info %}
+	Please wait...
+{% endblock %}
+
+{% block scripts %}
+<script>
+	var pending = false;
+	setInterval(probeServer,3500);
+
+	function probeServer() {
+		if (!pending) {
+			console.log("Probing...");
+			pending = true;
+			var xhttp = new XMLHttpRequest();
+			xhttp.responseType = 'json';
+			xhttp.open("GET","/apis/mlj_1/serverinfo", true);
+			xhttp.onreadystatechange = goback;
+			xhttp.send();
+
+		}
+
+	}
+
+	function goback() {
+		if ((this.readyState == 4) && (this.status == 200)) {
+			var response = this.response;
+			var status = response['db_status'];
+			console.log(response);
+			if (status['healthy'] && !status['rebuildinprogress']) {
+				window.location = "/admin_issues";
+			}
+			pending = false;
+		}
+	}
+
+</script>
+{% endblock %}

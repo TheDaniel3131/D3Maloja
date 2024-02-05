@@ -1,0 +1,37 @@
+{% extends "abstracts/base.jinja" %}
+{% block title %}Maloja - {{ malojatime.delimit_desc_p(delimitkeys) }} Pulse{% endblock %}
+
+{% import 'snippets/filterdescription.jinja' as filterdesc %}
+
+{% if filterkeys.get('track') is not none %}
+	{% set img = images.get_track_image(filterkeys.track) %}
+{% elif filterkeys.get('artist') is not none %}
+	{% set img = images.get_artist_image(filterkeys.artist) %}
+{% else %}
+	{% set img = "/favicon.png" %}
+{% endif %}
+
+{% block content %}
+		<table class="top_info">
+			<tr>
+				<td class="image">
+					<div style="background-image:url('{{ img }}')"></div>
+				</td>
+				<td class="text">
+					<h1>{{ malojatime.delimit_desc_p(delimitkeys) }} Pulse</h1>
+					{% if filterkeys != {} %}
+					<a href="{{ mlj_uri.create_uri("/performance",filterkeys,limitkeys,delimitkeys) }}"><span>View Rankings</span></a>
+					{% endif %}
+					<br/>
+					{{ filterdesc.desc(filterkeys,limitkeys,prefix='of') }}
+					<br/><br/>
+					{% include 'snippets/timeselection.jinja' %}
+
+				</td>
+			</tr>
+		</table>
+
+
+		{% include 'partials/pulse.jinja' %}
+
+{% endblock %}
